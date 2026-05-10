@@ -1,0 +1,84 @@
+{
+  // ─────────────────────────────────────────────────────────────────────────────
+  // settings.json comentado — 10 configs do Claude Code
+  // Canal: Adriano Viana — https://youtube.com/@adrianoviana
+  //
+  // Copie este arquivo para:
+  //   Global:  ~/.claude/settings.json
+  //   Projeto: .claude/settings.json  (na raiz do repositório)
+  //
+  // Remova os comentários antes de usar — JSON não aceita comentários por padrão.
+  // Use a versão sem comentários em settings.clean.json (arquivo ao lado).
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  "env": {
+
+    // ── Config 1: Terminal output limit ────────────────────────────────────────
+    // Default: 30000 (caracteres)
+    // Problema: tudo além de 30k é truncado — o Claude não sabe que perdeu dados.
+    // Com 150k: o output inteiro entra no contexto. Falhas enterradas no meio ficam visíveis.
+    "BASH_MAX_OUTPUT_LENGTH": "150000",
+
+    // ── Config 2: File read limit ──────────────────────────────────────────────
+    // Default: 25000 (tokens)
+    // Problema: arquivos grandes são lidos parcialmente — o Claude não avisa que cortou.
+    // Com 100k: a maioria dos arquivos grandes entra completa no contexto.
+    // Nota: o limite de 2000 linhas por operação Read não é configurável.
+    //       Workaround: instrua o CLAUDE.md a usar offset + limit para arquivos grandes.
+    "CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS": "100000",
+
+    // ── Config 3: Autocompact threshold ───────────────────────────────────────
+    // Default: 95 (% da janela de contexto)
+    // Problema: qualidade de output degrada antes de 95% — em torno de 70–75%.
+    // Com 75: o Claude compacta preventivamente e mantém margem de trabalho.
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "75",
+
+    // ── Config 7a: Desativar analytics (Statsig) ──────────────────────────────
+    // Default: envio habilitado
+    // "1" desativa o envio de dados analíticos de uso para o Statsig.
+    "DISABLE_TELEMETRY": "1",
+
+    // ── Config 7b: Desativar reporte de erros (Sentry) ────────────────────────
+    // Default: envio habilitado
+    // "1" desativa o envio de logs de erro para o Sentry.
+    "DISABLE_ERROR_REPORTING": "1",
+
+    // ── Config 7c: Desativar comando /feedback ─────────────────────────────────
+    // Default: comando habilitado
+    // "1" remove o comando /feedback da interface.
+    "DISABLE_FEEDBACK_COMMAND": "1"
+
+  },
+
+  // ── Config 4: Retenção de conversas ─────────────────────────────────────────
+  // Default: 30 (dias)
+  // 365 → mantém um ano de histórico — útil para /insights analisar período maior.
+  // 0   → nenhuma sessão armazenada — para ambientes com requisitos de privacidade rígidos.
+  "cleanupPeriodDays": 365,
+
+  // ── Config 6: Co-autoria no GitHub ──────────────────────────────────────────
+  // Default: Claude Code adicionado como co-autor em todos os commits e PRs.
+  // Strings vazias removem a co-autoria completamente.
+  // Ou defina um string customizado — aparece como o autor que você quiser.
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  }
+
+  // ── Config 5: Sub-agentes — frontmatter ──────────────────────────────────────
+  // Não é um campo do settings.json — fica no frontmatter de cada agente em .claude/agents/.
+  // Veja o arquivo agent-exemplo.md nesta pasta.
+
+  // ── Config 8: Prompt stashing (Ctrl+S) ───────────────────────────────────────
+  // Não é uma config — é um atalho nativo do Claude Code.
+  // Ctrl+S durante a digitação guarda o prompt atual.
+  // A próxima mensagem enviada restaura o prompt guardado no input.
+
+  // ── Config 9: Path-specific rules ────────────────────────────────────────────
+  // Não é um campo do settings.json — são arquivos em .claude/ vinculados a caminhos.
+  // Veja o arquivo path-rules-exemplo/ nesta pasta.
+
+  // ── Config 10: Hook exit codes ───────────────────────────────────────────────
+  // Não é um campo do settings.json — é comportamento dos hooks.
+  // Veja o arquivo hook-exit-code-exemplo.sh nesta pasta.
+}
