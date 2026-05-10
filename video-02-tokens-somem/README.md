@@ -1,7 +1,7 @@
 # Vídeo 02: Por que seus tokens somem (e como recuperar 80%)
 
-**Canal**: [Adriano Viana](https://youtube.com/@adrianoviana)
-**Assista**: [Link do vídeo no YouTube](#) _(será atualizado após publicação)_
+**Canal**: [Adriano Viana](https://www.youtube.com/@adriano_viana/videos)
+**Assista**: [youtube.com/@adriano_viana/videos](https://www.youtube.com/@adriano_viana/videos)
 
 ---
 
